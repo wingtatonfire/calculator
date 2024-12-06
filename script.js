@@ -63,7 +63,7 @@ const topDisplay = document.querySelector(".topDisplay");
 const equalButton = document.querySelector(".equalButton");
 const clearButton = document.querySelector(".clearButton");
 const dotButton = document.querySelector(".dotButton");
-
+const buttons = document.querySelectorAll('.conNumPad button');
 
 let firstNum = null;
 let operator = null;
@@ -118,4 +118,19 @@ dotButton.addEventListener("click", (event) => {
     dot = event.target.textContent;
     displayTextSpan.textContent += dot;
 })
+// create map to link related button to the key
+// just use the key to find out the button
+// then add the event listener to the document 
+// for keydown for out which key 
+// find out which button 
+// pass the .click() to that 
 
+const keyMap = {};
+buttons.forEach((button) => {
+    const key = button.getAttribute("data-key");
+    keyMap[key] = button;
+})
+document.addEventListener("keypress", (event) => {
+    let button = keyMap[event.key];
+    if (button) button.click()
+})

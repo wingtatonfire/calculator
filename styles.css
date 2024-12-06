@@ -1,17 +1,19 @@
-div {
-    border: 1px black solid;
-}
-
 .container {
     width: 300px;
     height: 500px;
     display: flex;
     flex-direction: column;
+    background-color: #95E1D3;
+    border-radius: 15px;
+    padding: 6px;
+    margin-top: 100px;
 }
 
 body {
     display: flex;
     justify-content: center;
+    background-color: rgb(236, 227, 213);
+    font-family: "Courier New", Courier, monospace;
 }
 
 .conDisplay {
@@ -31,31 +33,15 @@ body {
     align-items: center;
 }
 
-.divRow {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
 button {
     flex: 1;
-    padding: 8px;
+    padding: 5px;
     height: 50px;
     margin: 5px;
-
-}
-
-.buttonzero,
-.equalButton {
-    flex: 1;
-    margin: 7px;
-
-}
-
-.block {
-    flex: 1;
-    margin: 7px;
+    background-color: #FCE38A;
+    border-width: 0px;
+    border-radius: 15px;
+    font-size: 18px;
 }
 
 .display {
@@ -64,11 +50,29 @@ button {
     justify-content: right;
     flex: 1;
     margin: 12px;
+    margin-bottom: 4px;
+    background-color: #EAFFD0;
+
 }
 
 .displayText {
     text-align: right;
     margin-top: auto;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-size: 48px;
+    margin-right: 8px;
+}
+
+div {
+    border-radius: 15px;
+}
+
+.opButton,
+.equalButton,
+.clearButton {
+    background-color: #F38181;
+}
+.topDisplay {
+    margin: 12px;
+    font-size: 20px;
 }

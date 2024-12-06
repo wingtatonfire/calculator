@@ -80,3 +80,7 @@ div {
     margin: 12px;
     font-size: 20px;
 }
+
+.deleteButton {
+    background-color: #EAFFD0;
+}

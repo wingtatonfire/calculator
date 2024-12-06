@@ -11,6 +11,9 @@ function multiply(a, b) {
     return roundToTwoDecimals(result)
 }
 function divide(a, b) {
+    if (b == 0) {
+        return alert("you can't divide it by 0")
+    }
     let result = +a / +b
     return roundToTwoDecimals(result)
 }
@@ -64,6 +67,7 @@ const equalButton = document.querySelector(".equalButton");
 const clearButton = document.querySelector(".clearButton");
 const dotButton = document.querySelector(".dotButton");
 const buttons = document.querySelectorAll('.conNumPad button');
+const deleteButton = document.querySelector(".deleteButton");
 
 let firstNum = null;
 let operator = null;
@@ -133,7 +137,13 @@ buttons.forEach((button) => {
     const key = button.getAttribute("data-key");
     keyMap[key] = button;
 })
-document.addEventListener("keypress", (event) => {
+document.addEventListener("keydown", (event) => {
     let button = keyMap[event.key];
     if (button) button.click()
+})
+
+deleteButton.addEventListener("click", (event) => {
+    if (displayTextSpan.textContent) {
+        displayTextSpan.textContent = displayTextSpan.textContent.slice(0, -1);
+    }
 })

@@ -61,6 +61,10 @@ button {
     margin-bottom: 6px;
     font-size: 48px;
     margin-right: 8px;
+    display: inline-block; /* or block */
+    width: 268px; /* Set a fixed width */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 div {

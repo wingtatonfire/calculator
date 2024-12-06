@@ -74,8 +74,9 @@ let secondNum = null;
 numButtons.forEach(button => {
     button.addEventListener("click", (event) => {
         inputedNum = event.target.textContent;
-        displayTextSpan.textContent += inputedNum
-    })
+        displayTextSpan.textContent += inputedNum;
+    }
+    )
 })
 
 
@@ -116,7 +117,9 @@ clearButton.addEventListener("click", clearAll)
 
 dotButton.addEventListener("click", (event) => {
     dot = event.target.textContent;
-    displayTextSpan.textContent += dot;
+    if (!displayTextSpan.textContent.includes(".")) {
+        displayTextSpan.textContent += dot;
+    }
 })
 // create map to link related button to the key
 // just use the key to find out the button

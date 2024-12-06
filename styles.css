@@ -25,6 +25,12 @@ body {
     flex-direction: column;
 }
 
+.conNumPad div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
 .divRow {
     flex: 1;
     display: flex;
@@ -39,24 +45,29 @@ button {
     margin: 5px;
 
 }
-.buttonzero, .equalButton{
+
+.buttonzero,
+.equalButton {
     flex: 1;
     margin: 7px;
 
 }
+
 .block {
-    flex:1;
+    flex: 1;
     margin: 7px;
 }
 
 .display {
+    flex-direction: column;
     display: flex;
     justify-content: right;
-    flex:1;
+    flex: 1;
     margin: 12px;
 }
 
 .displayText {
+    text-align: right;
     margin-top: auto;
     margin-bottom: 8px;
     font-size: 48px;

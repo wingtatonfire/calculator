@@ -1,14 +1,18 @@
 function add(a, b) {
-    return +a + +b
+    let result = +a + +b
+    return roundToTwoDecimals(result)
 }
 function subtract(a, b) {
-    return +a - +b
+    let result = +a - +b
+    return roundToTwoDecimals(result)
 }
 function multiply(a, b) {
-    return +a * +b
+    let result = +a * +b
+    return roundToTwoDecimals(result)
 }
 function divide(a, b) {
-    return +a / +b
+    let result = +a / +b
+    return roundToTwoDecimals(result)
 }
 function operate(op, a, b) {
     switch (op) {
@@ -22,92 +26,96 @@ function operate(op, a, b) {
             return divide(a, b)
     }
 }
-let inputValue = "";
-let op = "";
-let a = "";
-let b = "";
-const array = ["+", "-", "*", "/"];
 
-const divStoredNum = document.querySelector(".storedNum")
-const divNumPad = document.querySelector(".conNumPad")
-for (let i = 0; i < 5; i++) {
-    const divRow = document.createElement("div")
-    divRow.setAttribute("class", "divRow")
-    divNumPad.appendChild(divRow)
-    if (i == 0) {
-        for (let x = 0; x <= 3; x++) {
-            const buttonOp = document.createElement("button")
-            buttonOp.setAttribute("class", "buttonOp")
-            buttonOp.textContent = array[x];
-            buttonOp.addEventListener("click", (event) => {
-                op = event.target.textContent;
-                if (!a) {
-                    a = inputValue;
-                }
-                divStoredNum.textContent = a + " " + op;
-                inputValue = "";
-                displayText.textContent = "";
-            })
-            divRow.appendChild(buttonOp)
-        }
-
-    }
-    if (i >= 1 && i < 4) {
-        for (let n = 0; n < 3; n++) {
-            const buttonNum = document.createElement("button")
-            buttonNum.setAttribute("class", "buttonNum")
-            if (i == 1) {
-                buttonNum.textContent = n + 7;
-            } else if (i == 2) {
-                buttonNum.textContent = n + 4;
-            } else if (i == 3) {
-                buttonNum.textContent = n + 1;
-            }
-            divRow.appendChild(buttonNum)
-        }
-    } else if (i == 4) {
-        const buttonNum = document.createElement("button");
-        const block2 = document.createElement("button");
-        const equalButton = document.createElement("button");
-        buttonNum.setAttribute("class", "buttonzero")
-        block2.setAttribute("class", "clearButton")
-        equalButton.setAttribute("class", "equalButton")
-        equalButton.textContent = "=";
-        equalButton.addEventListener("click", () => {
-            b = +inputValue;
-            inputValue = "";
-            displayText.textContent = operate(op, a, b);
-            a = +displayText.textContent;
-            inputValue = +displayText;
-            divStoredNum.textContent = displayText.textContent;
-        })
-        buttonNum.textContent = 0;
-        buttonNum.addEventListener("click", () => {
-            inputValue += +buttonNum.textContent
-            displayText.textContent = inputValue;
-        })
-        block2.textContent = "clear";
-        divRow.appendChild(buttonNum)
-        divRow.appendChild(block2)
-        divRow.appendChild(equalButton)
-    }
+function clearDisplay() {
+    displayTextSpan.textContent = null;
 }
-divNumPad.addEventListener("click", (event) => {
-    if (event.target.className === "buttonNum") {
-        inputValue += +event.target.textContent;
-        displayText.textContent = inputValue;
-        divStoredNum.textContent += " " + event.target.textContent;
+
+function clearTopDisplay() {
+    topDisplay.textContent = null;
+    secondNum = null;
+    operator = null;
+}
+
+function clearAll() {
+    clearDisplay()
+    clearTopDisplay()
+    firstNum = null;
+}
+
+function roundToTwoDecimals(number) {
+    // Check if the number has more than two decimal places
+    if (number.toString().includes('.') && number.toString().split('.')[1].length > 2) {
+        // Round the number to two decimal places
+        return parseFloat(number.toFixed(2));
+    }
+    // If not, return the number as it is
+    return number;
+}
+// i have to input the num to display
+// const
+
+
+const numButtons = document.querySelectorAll(".numButton");
+const displayTextSpan = document.querySelector(".displayText");
+const opButtons = document.querySelectorAll(".opButton");
+const topDisplay = document.querySelector(".topDisplay");
+const equalButton = document.querySelector(".equalButton");
+const clearButton = document.querySelector(".clearButton");
+const dotButton = document.querySelector(".dotButton");
+
+
+let firstNum = null;
+let operator = null;
+let secondNum = null;
+
+//eventlistener
+//put the number to the display when got click
+numButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+        inputedNum = event.target.textContent;
+        displayTextSpan.textContent += inputedNum
+    })
+})
+
+
+// add the function of operate button
+// when user press it the display number and operater go to storedValue
+// if firstNum, operator and secondNum true when u press opbutton 
+// do the operation
+opButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+        if (firstNum && operator) {
+            secondNum = displayTextSpan.textContent;
+            firstNum = operate(operator, firstNum, secondNum)
+            displayTextSpan.textContent = null;
+            operator = event.target.textContent;
+            topDisplay.textContent = firstNum + " " + operator;
+        } else {
+            firstNum = displayTextSpan.textContent;
+            operator = event.target.textContent;
+            topDisplay.textContent = firstNum + " " + operator;
+            clearDisplay()
+        }
+    })
+})
+
+// add the function of the equal button when it got clicked 
+// do the operation when first Number, op and displaytext exist 
+equalButton.addEventListener("click", (event) => {
+    secondNum = displayTextSpan.textContent;
+    if (firstNum && operator && secondNum) {
+        displayTextSpan.textContent = operate(operator, firstNum, secondNum)
+        firstNum = displayTextSpan.textContent;
+        clearTopDisplay()
     }
 })
 
-const displayText = document.querySelector(".displayText")
-const block2 = document.querySelector(".clearButton")
-block2.addEventListener("click", () => {
-    displayText.textContent = "";
-    inputValue = "";
-    a = 0;
-    b = 0;
-    divStoredNum.textContent = "";
-})
+// set up the function of the clear button
+clearButton.addEventListener("click", clearAll)
 
+dotButton.addEventListener("click", (event) => {
+    dot = event.target.textContent;
+    displayTextSpan.textContent += dot;
+})
 

@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <div class="conDisplay">
-            <div class="display"><span class="displayText"></span></div>
+            <div class="display">
+                <div class="topDisplay"></div>
+                <span class="displayText"></span>
+            </div>
         </div>
-        <div class="conNumPad"></div>
+        <div class="conNumPad">
+            <div class="rowOne">
+                <button class="opButton">+</button>
+                <button class="opButton">-</button>
+                <button class="opButton">*</button>
+                <button class="opButton">/</button>
+            </div>
+            <div class="rowTwo">
+                <button class="numButton">7</button>
+                <button class="numButton">8</button>
+                <button class="numButton">9</button>
+            </div>
+            <div class="rowThree">
+                <button class="numButton">4</button>
+                <button class="numButton">5</button>
+                <button class="numButton">6</button>
+            </div>
+            <div class="rowFour">
+                <button class="numButton">1</button>
+                <button class="numButton">2</button>
+                <button class="numButton">3</button>
+            </div>
+            <div class="rowFour">
+                <button class="dotButton">.</button>
+                <button class="numButton">0</button>
+                <button class="clearButton">CE</button>
+                <button class="equalButton">=</button>
 
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
